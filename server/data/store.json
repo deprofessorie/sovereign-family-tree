@@ -1,0 +1,823 @@
+{
+  "houses": [
+    {
+      "id": "house-stirling",
+      "name": "House Stirling",
+      "motto": "Forward in Honor, Rooted in Strength",
+      "originCountry": "Scotland, United Kingdom",
+      "originCity": "Stirling Castle",
+      "foundedYear": 1482,
+      "crestSymbol": "Crown & Golden Lion",
+      "heraldicColor": "#f59e0b",
+      "badgeIcon": "🦁",
+      "headMemberId": "m-stirling-1",
+      "headRoleTitle": "Lord Sovereign",
+      "referralCode": "STIRLING-7421",
+      "description": "Ancient noble highland line known for royal alliances, historic chronicles, and steadfast stewardship.",
+      "coordinates": {
+        "lat": 56.1165,
+        "lng": -3.9369
+      },
+      "isApproved": true,
+      "alliedHouses": [
+        "house-takahashi",
+        "house-dubois"
+      ]
+    },
+    {
+      "id": "house-takahashi",
+      "name": "House Takahashi",
+      "motto": "Harmony, Precision, Eternal Honor",
+      "originCountry": "Japan",
+      "originCity": "Kyoto",
+      "foundedYear": 1603,
+      "crestSymbol": "Golden Chrysanthemum & Moon",
+      "heraldicColor": "#ec4899",
+      "badgeIcon": "🌸",
+      "headMemberId": "m-takahashi-1",
+      "headRoleTitle": "Patriarch & Clan Guardian",
+      "referralCode": "TAKAHASHI-9182",
+      "description": "Distinguished line of master scholars, architects, and diplomats rooted in Edo-period heritage.",
+      "coordinates": {
+        "lat": 35.0116,
+        "lng": 135.7681
+      },
+      "isApproved": true,
+      "alliedHouses": [
+        "house-stirling"
+      ]
+    },
+    {
+      "id": "house-almansoor",
+      "name": "House Al-Mansoor",
+      "motto": "Knowledge is the Sovereign Fortress",
+      "originCountry": "Morocco / Andalusia",
+      "originCity": "Fez",
+      "foundedYear": 1510,
+      "crestSymbol": "Emerald Falcon & Crescent",
+      "heraldicColor": "#10b981",
+      "badgeIcon": "🦅",
+      "headMemberId": "m-almansoor-1",
+      "headRoleTitle": "Grand Vizier of the Lineage",
+      "referralCode": "ALMANSOOR-3304",
+      "description": "Ancient custodians of scientific manuscripts, trade routes, and majestic botanical gardens.",
+      "coordinates": {
+        "lat": 34.0331,
+        "lng": -5.0003
+      },
+      "isApproved": true,
+      "alliedHouses": [
+        "house-dubois",
+        "house-chen"
+      ]
+    },
+    {
+      "id": "house-dubois",
+      "name": "House Dubois",
+      "motto": "Virtue Without Stasis",
+      "originCountry": "France",
+      "originCity": "Lyon",
+      "foundedYear": 1740,
+      "crestSymbol": "Royal Fleur-de-lis & Silver Compass",
+      "heraldicColor": "#3b82f6",
+      "badgeIcon": "⚜️",
+      "headMemberId": "m-dubois-1",
+      "headRoleTitle": "Master Chancellor",
+      "referralCode": "DUBOIS-5821",
+      "description": "Celebrated lineage of European jurists, vintners, and classical cartographers.",
+      "coordinates": {
+        "lat": 45.764,
+        "lng": 4.8357
+      },
+      "isApproved": true,
+      "alliedHouses": [
+        "house-stirling",
+        "house-almansoor"
+      ]
+    },
+    {
+      "id": "house-chen",
+      "name": "House Chen",
+      "motto": "Rivers Flow, The Dragon Abides",
+      "originCountry": "China",
+      "originCity": "Hangzhou",
+      "foundedYear": 1368,
+      "crestSymbol": "Azure Dragon & Pine",
+      "heraldicColor": "#06b6d4",
+      "badgeIcon": "🐉",
+      "headMemberId": "m-chen-1",
+      "headRoleTitle": "Elder Patriarch",
+      "referralCode": "CHEN-8833",
+      "description": "Renowned maritime traders and calligraphy masters of West Lake, preserving centuries of unbroken lineage records.",
+      "coordinates": {
+        "lat": 30.2741,
+        "lng": 120.1551
+      },
+      "isApproved": true,
+      "alliedHouses": [
+        "house-almansoor"
+      ]
+    },
+    {
+      "id": "house-oconnor",
+      "name": "House O'Connor",
+      "motto": "Faithful Unto the End",
+      "originCountry": "Ireland",
+      "originCity": "Dublin & Connacht",
+      "foundedYear": 1620,
+      "crestSymbol": "Silver Harp & Oak Tree",
+      "heraldicColor": "#84cc16",
+      "badgeIcon": "☘️",
+      "headMemberId": "m-oconnor-1",
+      "headRoleTitle": "Chieftain of the Glens",
+      "referralCode": "OCONNOR-1928",
+      "description": "Legendary Celtic keepers of song, folklore, and highland resilience across eras.",
+      "coordinates": {
+        "lat": 53.3498,
+        "lng": -6.2603
+      },
+      "isApproved": true,
+      "alliedHouses": [
+        "house-stirling"
+      ]
+    }
+  ],
+  "members": [
+    {
+      "id": "m-stirling-root",
+      "houseId": "house-stirling",
+      "name": "Sir Archibald Stirling",
+      "gender": "Male",
+      "title": "1st Baron of the Highland Archive",
+      "birthDate": "1920-03-15",
+      "deathDate": "1998-11-20",
+      "isLiving": false,
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&fit=crop&q=80",
+      "bio": "Patriarch who unified the northern historical codices and established the ancestral foundation.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-stirling-root-wife",
+          "spouseName": "Lady Beatrice Montgomery",
+          "spouseHouseId": "house-oconnor",
+          "spouseHouseName": "House O'Connor",
+          "marriageDate": "1945-06-12",
+          "status": "Deceased",
+          "bondSealStatus": "SEALED",
+          "notes": "First Lady of the Highland Council"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-root-wife",
+      "houseId": "house-stirling",
+      "name": "Lady Beatrice Montgomery",
+      "gender": "Female",
+      "title": "Dowager Baroness of Stirling",
+      "birthDate": "1924-08-22",
+      "deathDate": "2005-04-14",
+      "isLiving": false,
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&fit=crop&q=80",
+      "bio": "Matriarch born of Irish nobility, renowned for her patronages in arts and archival preservation.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-stirling-root",
+          "spouseName": "Sir Archibald Stirling",
+          "spouseHouseId": "house-stirling",
+          "spouseHouseName": "House Stirling",
+          "marriageDate": "1945-06-12",
+          "status": "Deceased",
+          "bondSealStatus": "SEALED",
+          "notes": "Spouse of Sir Archibald"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-1",
+      "houseId": "house-stirling",
+      "name": "Lord Alistair Stirling",
+      "gender": "Male",
+      "title": "Lord Sovereign of House Stirling",
+      "birthDate": "1952-09-08",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&fit=crop&q=80",
+      "bio": "Current head of the House. Oversees the global archives, treaty seals, and ancestral hall restorations.",
+      "fatherId": "m-stirling-root",
+      "motherId": "m-stirling-root-wife",
+      "maritalStatus": "Married",
+      "hasMultipleWives": true,
+      "spouses": [
+        {
+          "spouseId": "m-stirling-wife-1",
+          "spouseName": "Lady Fiona MacLeod",
+          "spouseHouseId": "house-stirling",
+          "spouseHouseName": "House Stirling",
+          "marriageDate": "1975-07-19",
+          "status": "Divorced",
+          "bondSealStatus": "SEALED",
+          "notes": "Divorced in 1988 with diplomatic accord"
+        },
+        {
+          "spouseId": "m-stirling-wife-2",
+          "spouseName": "Lady Sakura Takahashi",
+          "spouseHouseId": "house-takahashi",
+          "spouseHouseName": "House Takahashi",
+          "marriageDate": "1992-10-04",
+          "status": "Living",
+          "bondSealStatus": "SEALED",
+          "notes": "Consort Lady of Stirling & Envoy of Kyoto"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-wife-1",
+      "houseId": "house-stirling",
+      "name": "Lady Fiona MacLeod",
+      "gender": "Female",
+      "title": "Former Consort of Stirling",
+      "birthDate": "1954-05-18",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&fit=crop&q=80",
+      "bio": "Distinguished botanist and patron of natural sanctuaries in Argyll.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Divorced",
+      "spouses": [
+        {
+          "spouseId": "m-stirling-1",
+          "spouseName": "Lord Alistair Stirling",
+          "spouseHouseId": "house-stirling",
+          "spouseHouseName": "House Stirling",
+          "marriageDate": "1975-07-19",
+          "status": "Divorced",
+          "bondSealStatus": "SEALED",
+          "notes": "Divorced of Lord Alistair Stirling"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-wife-2",
+      "houseId": "house-stirling",
+      "name": "Lady Sakura Takahashi",
+      "gender": "Female",
+      "title": "High Consort & Envoy of Kyoto",
+      "birthDate": "1965-02-14",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&fit=crop&q=80",
+      "bio": "Daughter of House Takahashi; sealed the Historic Stirling-Takahashi Alliance.",
+      "fatherId": "m-takahashi-1",
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-stirling-1",
+          "spouseName": "Lord Alistair Stirling",
+          "spouseHouseId": "house-stirling",
+          "spouseHouseName": "House Stirling",
+          "marriageDate": "1992-10-04",
+          "status": "Living",
+          "bondSealStatus": "SEALED",
+          "notes": "Current Loving Bond with Lord Alistair"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-3",
+      "houseId": "house-stirling",
+      "name": "Malcolm Stirling",
+      "gender": "Male",
+      "title": "Master of Castle Rock",
+      "birthDate": "1979-11-12",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&fit=crop&q=80",
+      "bio": "Heir Apparent to the Stirling Estate, civil engineer and mountain climber.",
+      "fatherId": "m-stirling-1",
+      "motherId": "m-stirling-wife-1",
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-dubois-elise",
+          "spouseName": "Elise Dubois",
+          "spouseHouseId": "house-dubois",
+          "spouseHouseName": "House Dubois",
+          "marriageDate": "2010-08-20",
+          "status": "Living",
+          "bondSealStatus": "SEALED",
+          "notes": "Alliance with House Dubois"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-4",
+      "houseId": "house-stirling",
+      "name": "Kenji Stirling-Takahashi",
+      "gender": "Male",
+      "title": "Ambassador of Cultural Archives",
+      "birthDate": "1995-04-25",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&fit=crop&q=80",
+      "bio": "Bridges genealogical research between Europe and Asia.",
+      "fatherId": "m-stirling-1",
+      "motherId": "m-stirling-wife-2",
+      "maritalStatus": "Single",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-5",
+      "houseId": "house-stirling",
+      "name": "Lady Jane Stirling",
+      "gender": "Female",
+      "title": "Curator of Ancient Seals",
+      "birthDate": "1998-07-30",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&fit=crop&q=80",
+      "bio": "Active member and archivist; logs records and organizes annual family assemblies.",
+      "fatherId": "m-stirling-1",
+      "motherId": "m-stirling-wife-2",
+      "maritalStatus": "Single",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-aunt",
+      "houseId": "house-stirling",
+      "name": "Lady Margaret Stirling",
+      "gender": "Female",
+      "title": "Elder Matron of the Glens",
+      "birthDate": "1955-01-10",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=300&fit=crop&q=80",
+      "bio": "Beloved aunt of the family, renowned genealogist and historian.",
+      "fatherId": "m-stirling-root",
+      "motherId": "m-stirling-root-wife",
+      "maritalStatus": "Widowed",
+      "hasMultipleHusbands": true,
+      "spouses": [
+        {
+          "spouseId": "m-spouse-deceased-1",
+          "spouseName": "Lord Henry O'Connor",
+          "spouseHouseId": "house-oconnor",
+          "spouseHouseName": "House O'Connor",
+          "marriageDate": "1978-04-15",
+          "status": "Deceased",
+          "bondSealStatus": "SEALED",
+          "notes": "Widow of Lord Henry O'Connor (d. 2002)"
+        },
+        {
+          "spouseId": "m-spouse-divorced-2",
+          "spouseName": "Jean-Luc Dubois",
+          "spouseHouseId": "house-dubois",
+          "spouseHouseName": "House Dubois",
+          "marriageDate": "2006-09-12",
+          "status": "Divorced",
+          "bondSealStatus": "SEALED",
+          "notes": "Divorced of Jean-Luc Dubois (2015)"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-child-1",
+      "houseId": "house-stirling",
+      "name": "Isla Stirling",
+      "gender": "Female",
+      "title": "Lady of the Dawn",
+      "birthDate": "2014-06-18",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=300&fit=crop&q=80",
+      "bio": "Fourth generation heir of the Stirling lineage.",
+      "fatherId": "m-stirling-3",
+      "motherId": "m-dubois-elise",
+      "maritalStatus": "Single",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-stirling-child-2",
+      "houseId": "house-stirling",
+      "name": "Callum Stirling",
+      "gender": "Male",
+      "title": "Young Steward",
+      "birthDate": "2018-09-02",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&fit=crop&q=80",
+      "bio": "Youngest scion of the direct branch.",
+      "fatherId": "m-stirling-3",
+      "motherId": "m-dubois-elise",
+      "maritalStatus": "Single",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-takahashi-1",
+      "houseId": "house-takahashi",
+      "name": "Kenzo Takahashi",
+      "gender": "Male",
+      "title": "12th Patriarch of Kyoto",
+      "birthDate": "1940-11-03",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&fit=crop&q=80",
+      "bio": "Guardian of ancestral scrolls and founder of the International Traditional Architecture Institute.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-takahashi-wife",
+          "spouseName": "Emi Takahashi",
+          "spouseHouseId": "house-takahashi",
+          "spouseHouseName": "House Takahashi",
+          "marriageDate": "1963-05-10",
+          "status": "Living",
+          "bondSealStatus": "SEALED",
+          "notes": "Lifetime companion"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-takahashi-wife",
+      "houseId": "house-takahashi",
+      "name": "Emi Takahashi",
+      "gender": "Female",
+      "title": "Matron of the Chrysanthemum Garden",
+      "birthDate": "1943-02-18",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=300&fit=crop&q=80",
+      "bio": "Ceremonial tea master and genealogist.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-takahashi-1",
+          "spouseName": "Kenzo Takahashi",
+          "spouseHouseId": "house-takahashi",
+          "spouseHouseName": "House Takahashi",
+          "marriageDate": "1963-05-10",
+          "status": "Living",
+          "bondSealStatus": "SEALED",
+          "notes": "Spouse of Kenzo"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-takahashi-son",
+      "houseId": "house-takahashi",
+      "name": "Ren Takahashi",
+      "gender": "Male",
+      "title": "Master of the Garden Grove",
+      "birthDate": "1972-10-15",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&fit=crop&q=80",
+      "bio": "Architectural conservationist in Kansai.",
+      "fatherId": "m-takahashi-1",
+      "motherId": "m-takahashi-wife",
+      "maritalStatus": "Single",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-almansoor-1",
+      "houseId": "house-almansoor",
+      "name": "Tariq Al-Mansoor",
+      "gender": "Male",
+      "title": "Grand Vizier of Fez",
+      "birthDate": "1948-03-22",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&fit=crop&q=80",
+      "bio": "Keeper of the Medersa libraries and patron of world heritage preservation.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-almansoor-layla",
+          "spouseName": "Layla Al-Mansoor",
+          "spouseHouseId": "house-almansoor",
+          "spouseHouseName": "House Al-Mansoor",
+          "marriageDate": "1973-04-12",
+          "status": "Living",
+          "bondSealStatus": "SEALED",
+          "notes": "Matriarch of the Fez Estate"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-almansoor-layla",
+      "houseId": "house-almansoor",
+      "name": "Layla Al-Mansoor",
+      "gender": "Female",
+      "title": "Matron of the Emerald Falcon",
+      "birthDate": "1951-09-17",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&fit=crop&q=80",
+      "bio": "Scholar of medieval astronomical instruments.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-almansoor-1",
+          "spouseName": "Tariq Al-Mansoor",
+          "spouseHouseId": "house-almansoor",
+          "spouseHouseName": "House Al-Mansoor",
+          "marriageDate": "1973-04-12",
+          "status": "Living",
+          "bondSealStatus": "SEALED",
+          "notes": "Spouse of Tariq"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-almansoor-daughter",
+      "houseId": "house-almansoor",
+      "name": "Soraya Al-Mansoor",
+      "gender": "Female",
+      "title": "Chancellor of Mediterranean Relations",
+      "birthDate": "1984-06-05",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&fit=crop&q=80",
+      "bio": "International human rights attorney and cultural archivist.",
+      "fatherId": "m-almansoor-1",
+      "motherId": "m-almansoor-layla",
+      "maritalStatus": "Single",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-dubois-1",
+      "houseId": "house-dubois",
+      "name": "Henri Dubois",
+      "gender": "Male",
+      "title": "Master Chancellor of Lyon",
+      "birthDate": "1955-08-11",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&fit=crop&q=80",
+      "bio": "Master vintner and custodian of the historic Rhone parchment archives.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-dubois-elise",
+      "houseId": "house-dubois",
+      "name": "Elise Dubois",
+      "gender": "Female",
+      "title": "Lady Consort of Castle Rock",
+      "birthDate": "1982-12-04",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&fit=crop&q=80",
+      "bio": "Daughter of Henri Dubois, married into House Stirling, sealing the Franco-Scottish genealogical accord.",
+      "fatherId": "m-dubois-1",
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [
+        {
+          "spouseId": "m-stirling-3",
+          "spouseName": "Malcolm Stirling",
+          "spouseHouseId": "house-stirling",
+          "spouseHouseName": "House Stirling",
+          "marriageDate": "2010-08-20",
+          "status": "Living",
+          "bondSealStatus": "SEALED",
+          "notes": "United with Malcolm Stirling"
+        }
+      ],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-chen-1",
+      "houseId": "house-chen",
+      "name": "Chen Weimin",
+      "gender": "Male",
+      "title": "Elder Patriarch of West Lake",
+      "birthDate": "1945-01-28",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&fit=crop&q=80",
+      "bio": "Calligrapher and protector of the 600-year Chen Clan Genealogy Scroll.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-oconnor-1",
+      "houseId": "house-oconnor",
+      "name": "Cormac O'Connor",
+      "gender": "Male",
+      "title": "Chieftain of Connacht",
+      "birthDate": "1960-03-17",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&fit=crop&q=80",
+      "bio": "Highland musician and keeper of ancient Celtic oral histories.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Married",
+      "spouses": [],
+      "isTemporaryHead": false
+    }
+  ],
+  "marriageBonds": [
+    {
+      "id": "bond-stirling-takahashi",
+      "husbandId": "m-stirling-1",
+      "husbandName": "Lord Alistair Stirling",
+      "husbandHouseId": "house-stirling",
+      "wifeId": "m-stirling-wife-2",
+      "wifeName": "Lady Sakura Takahashi",
+      "wifeHouseId": "house-takahashi",
+      "proposedDate": "1992-05-15",
+      "sealedDate": "1992-10-04",
+      "status": "SEALED",
+      "approvedByHouseA": true,
+      "approvedByHouseB": true,
+      "approvedByKeeper": true,
+      "pactTitle": "Highland & Kyoto Alliance Accord",
+      "notes": "Officially sealed by the Sovereign Keeper of the Whole Archive and approved by heads of both houses."
+    },
+    {
+      "id": "bond-stirling-dubois",
+      "husbandId": "m-stirling-3",
+      "husbandName": "Malcolm Stirling",
+      "husbandHouseId": "house-stirling",
+      "wifeId": "m-dubois-elise",
+      "wifeName": "Elise Dubois",
+      "wifeHouseId": "house-dubois",
+      "proposedDate": "2010-02-14",
+      "sealedDate": "2010-08-20",
+      "status": "SEALED",
+      "approvedByHouseA": true,
+      "approvedByHouseB": true,
+      "approvedByKeeper": true,
+      "pactTitle": "Franco-Scottish Genealogical Union",
+      "notes": "Celebrated in both Lyon Cathedral and Stirling Castle."
+    },
+    {
+      "id": "bond-pending-almansoor-takahashi",
+      "husbandId": "m-takahashi-son",
+      "husbandName": "Ren Takahashi",
+      "husbandHouseId": "house-takahashi",
+      "wifeId": "m-almansoor-daughter",
+      "wifeName": "Soraya Al-Mansoor",
+      "wifeHouseId": "house-almansoor",
+      "proposedDate": "2026-09-15",
+      "sealedDate": "2026-10-28",
+      "status": "SEALED",
+      "approvedByHouseA": true,
+      "approvedByHouseB": true,
+      "approvedByKeeper": true,
+      "pactTitle": "Kyoto & Fez Cultural Affinity Pact",
+      "notes": "Currently awaiting ratification by House Al-Mansoor and final seal by the Archive Keeper."
+    }
+  ],
+  "notices": [
+    {
+      "id": "notice-global-1",
+      "houseId": "GLOBAL",
+      "authorId": "user-keeper",
+      "authorName": "Keeper of the Whole Archive",
+      "title": "Global Imperial Decree: The Worldwide Sovereign Roll is Open",
+      "content": "All sovereign houses, ancient clans, and founding families across the seven continents are hereby called to register their heraldry, update their lineages, and seal diplomatic bonds of marriage.",
+      "type": "PROCLAMATION",
+      "date": "2026-10-01",
+      "isGlobal": true,
+      "isApproved": true,
+      "likes": 128
+    },
+    {
+      "id": "notice-stirling-1",
+      "houseId": "house-stirling",
+      "authorId": "m-stirling-1",
+      "authorName": "Lord Alistair Stirling",
+      "title": "Assembly of the Clan at the Great Hall of Stirling",
+      "content": "The annual clan muster and banquet shall take place on the winter solstice. All branches, including our esteemed allied kin of House Takahashi and House Dubois, are summoned to take their seat at the round table.",
+      "type": "ANNOUNCEMENT",
+      "date": "2026-10-15",
+      "isGlobal": false,
+      "isApproved": true,
+      "likes": 42
+    },
+    {
+      "id": "notice-stirling-2",
+      "houseId": "house-stirling",
+      "authorId": "m-stirling-5",
+      "authorName": "Lady Jane Stirling",
+      "title": "Discovery of 18th Century Baptismal Register",
+      "content": "During restoration of the east wing archive chamber, an unrecorded register detailing marriages with House O'Connor was unearthed. Transcription is underway in the lineage portal.",
+      "type": "REMEMBRANCE",
+      "date": "2026-10-22",
+      "isGlobal": false,
+      "isApproved": true,
+      "likes": 29
+    }
+  ],
+  "events": [
+    {
+      "id": "event-global-1",
+      "houseId": "GLOBAL",
+      "title": "Worldwide Conclave of Noble Lineages",
+      "description": "Biennial international summit bringing together house heads, archivists, and keepers from 40+ countries for genealogical consensus.",
+      "date": "2026-12-10",
+      "location": "Imperial Grand Hall, Geneva & Virtual Holographic Stream",
+      "type": "COUNCIL",
+      "rsvpCount": 340,
+      "isGlobal": true,
+      "isApproved": true
+    },
+    {
+      "id": "event-stirling-1",
+      "houseId": "house-stirling",
+      "title": "Grand Solstice Feast & Royal Tree Illumination",
+      "description": "Ceremonial reading of the ancestral roll followed by the lighting of the Stirling Crest beacons atop Castle Rock.",
+      "date": "2026-12-21",
+      "location": "Stirling Castle Great Hall, Scotland",
+      "type": "REUNION",
+      "rsvpCount": 85,
+      "isGlobal": false,
+      "isApproved": true
+    },
+    {
+      "id": "event-takahashi-1",
+      "houseId": "house-takahashi",
+      "title": "Chrysanthemum Blossom Ancestral Memorial",
+      "description": "Traditional tea ritual and recitation of the founding poetry of the Edo period ancestors.",
+      "date": "2026-11-15",
+      "location": "Kyoto Ancestral Shrine, Japan",
+      "type": "MEMORIAL",
+      "rsvpCount": 62,
+      "isGlobal": false,
+      "isApproved": true
+    }
+  ],
+  "keyFigures": [
+    {
+      "id": "kf-stirling-1",
+      "houseId": "house-stirling",
+      "memberId": "m-stirling-root",
+      "name": "Sir Archibald Stirling",
+      "roleTitle": "1st Baron & Founding Archivist",
+      "era": "20th Century",
+      "achievements": "Rescued 14 medieval parchment codices during WWII; chartered the sovereign family library.",
+      "portrait": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&fit=crop&q=80"
+    },
+    {
+      "id": "kf-stirling-2",
+      "houseId": "house-stirling",
+      "memberId": "m-stirling-1",
+      "name": "Lord Alistair Stirling",
+      "roleTitle": "Current Sovereign & Diplomat",
+      "era": "Contemporary",
+      "achievements": "Sealed historic multi-continental treaties; digitized 500 years of heraldic seals.",
+      "portrait": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&fit=crop&q=80"
+    },
+    {
+      "id": "kf-stirling-3",
+      "houseId": "house-stirling",
+      "memberId": "m-stirling-wife-2",
+      "name": "Lady Sakura Takahashi",
+      "roleTitle": "Consort Lady & Cultural Envoy",
+      "era": "Contemporary",
+      "achievements": "Pioneered East-West archival exchange fellowships; curated the imperial gift exhibits.",
+      "portrait": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&fit=crop&q=80"
+    }
+  ],
+  "temporaryHouseClaims": []
+}
