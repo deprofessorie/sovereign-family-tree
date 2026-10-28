@@ -11,7 +11,7 @@ import {
   Shield,
   ChevronDown,
   User,
-  Sparkles
+  Check
 } from 'lucide-react';
 
 export default function Navbar({
@@ -28,26 +28,30 @@ export default function Navbar({
   const personas = [
     {
       role: 'KEEPER',
-      label: '👑 Site Owner / Archive Keeper',
-      desc: 'Absolute command: edit, add, delete all houses, members, roles & seals',
+      label: '👑 Archive Keeper (Site Owner)',
+      badge: 'Omnipotent',
+      desc: 'Absolute command: edit/remove any house, member, and seal marriages',
       color: 'text-amber-300'
     },
     {
       role: 'HEAD',
       label: '🛡️ House Head (Lord Alistair)',
-      desc: 'Sovereign of House Stirling: manage house, approve submissions & bonds',
-      color: 'text-blue-300'
+      badge: 'Sovereign',
+      desc: 'House Stirling Head: manage house, approve submissions & alliances',
+      color: 'text-sky-300'
     },
     {
       role: 'MEMBER',
       label: '👤 House Member (Jane Stirling)',
-      desc: 'Authenticated kinsman: modify profile, submit children, spouse & notices',
+      badge: 'Kinsman',
+      desc: 'Verified kinsman: modify profile, submit children, spouse & notices',
       color: 'text-emerald-300'
     },
     {
       role: 'VISITOR',
       label: '🌐 Global Public Visitor',
-      desc: 'Unauthenticated explorer: view public globe, house summaries & join links',
+      badge: 'Public',
+      desc: 'Explore public 3D globe and directory summaries; join or found family',
       color: 'text-slate-300'
     }
   ];
@@ -55,249 +59,274 @@ export default function Navbar({
   const currentPersona = personas.find(p => p.role === userRole) || personas[0];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-amber-500/20 bg-slate-950/90 backdrop-blur-xl">
-      {/* Topmost Persona Simulator Ribbon */}
-      <div className="bg-slate-900/90 border-b border-slate-800/80 px-4 py-1.5 flex items-center justify-between text-xs">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-          <span className="text-slate-400 hidden sm:inline">Active Access Role:</span>
-          
-          <div className="relative">
+    <>
+      {/* Desktop & Tablet Floating Header */}
+      <header className="sticky top-0 z-40 w-full apple-liquid-glass">
+        {/* Topmost Persona Selector Ribbon */}
+        <div className="border-b border-white/10 px-4 sm:px-6 py-2 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-3">
+            <span className="text-slate-400 font-medium hidden sm:inline">Active Persona:</span>
+
+            <div className="relative">
+              <button
+                onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium border border-white/10 transition-all apple-touch-target min-h-[34px]"
+                aria-expanded={roleDropdownOpen}
+                aria-label="Select User Role Persona"
+              >
+                <span className="font-semibold text-xs">{currentPersona.label}</span>
+                <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+              </button>
+
+              {roleDropdownOpen && (
+                <div className="absolute top-full left-0 mt-2 w-84 rounded-2xl apple-liquid-glass p-2 z-50 shadow-2xl text-left animate-in fade-in zoom-in-95">
+                  <div className="px-3 py-1.5 text-[10px] uppercase tracking-wider text-slate-400 font-bold">
+                    Switch Active Perspective
+                  </div>
+                  {personas.map(p => (
+                    <button
+                      key={p.role}
+                      onClick={() => {
+                        setUserRole(p.role);
+                        setRoleDropdownOpen(false);
+                      }}
+                      className={`w-full p-2.5 rounded-xl text-left hover:bg-white/10 transition-all flex items-start justify-between ${
+                        userRole === p.role ? 'bg-white/15 border border-white/20' : ''
+                      }`}
+                    >
+                      <div>
+                        <div className={`font-semibold text-xs ${p.color}`}>{p.label}</div>
+                        <div className="text-[11px] text-slate-400 mt-0.5 leading-snug">{p.desc}</div>
+                      </div>
+                      {userRole === p.role && <Check className="w-4 h-4 text-amber-400 shrink-0 ml-2" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Actions (Apple HIG: Clear verbs, min 44pt touch targets) */}
+          <div className="flex items-center gap-2">
             <button
-              onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-              className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 font-semibold transition-all"
+              onClick={onOpenReferralModal}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 border border-white/10 text-xs font-medium transition-all"
             >
-              <span>{currentPersona.label}</span>
-              <ChevronDown className="w-3 h-3 text-slate-400" />
+              <KeyRound className="w-3.5 h-3.5 text-amber-400" />
+              <span>Join with Code</span>
             </button>
 
-            {roleDropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-80 rounded-2xl bg-slate-900 border border-amber-500/30 shadow-2xl p-2 z-50 text-left">
-                <div className="px-2 py-1 text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-                  Switch Active Perspective
-                </div>
-                {personas.map(p => (
-                  <button
-                    key={p.role}
-                    onClick={() => {
-                      setUserRole(p.role);
-                      setRoleDropdownOpen(false);
-                    }}
-                    className={`w-full p-2.5 rounded-xl text-left hover:bg-slate-800/90 transition-all flex flex-col ${
-                      userRole === p.role ? 'bg-amber-500/10 border border-amber-500/30' : ''
-                    }`}
-                  >
-                    <span className={`font-bold text-xs ${p.color}`}>{p.label}</span>
-                    <span className="text-[10px] text-slate-400 mt-0.5 leading-snug">{p.desc}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Quick Referral & Found family actions */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={onOpenReferralModal}
-            className="flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-[11px] font-medium"
-          >
-            <KeyRound className="w-3 h-3 text-amber-400" />
-            <span>Join with Code</span>
-          </button>
-
-          <button
-            onClick={onOpenFoundModal}
-            className="flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 text-[11px] font-semibold"
-          >
-            <Plus className="w-3 h-3" />
-            <span>Found Family</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-        {/* Brand Logo */}
-        <div
-          onClick={() => setActiveTab('GLOBE')}
-          className="flex items-center gap-3 cursor-pointer group"
-        >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 shadow-lg shadow-amber-500/20 group-hover:scale-105 transition-transform">
-            <Landmark className="w-5 h-5 font-black" />
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-lg font-black tracking-wider font-serif-heraldic text-white">
-                SOVEREIGN TREE
-              </span>
-              <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">
-                REALM
-              </span>
-            </div>
-            <p className="text-[10px] text-slate-400 tracking-wide font-sans">
-              Worldwide Archive of Noble Houses
-            </p>
-          </div>
-        </div>
-
-        {/* Navigation Tabs */}
-        <nav className="hidden md:flex items-center gap-1 text-xs font-semibold">
-          <button
-            onClick={() => setActiveTab('GLOBE')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all ${
-              activeTab === 'GLOBE'
-                ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-900'
-            }`}
-          >
-            <Globe className="w-3.5 h-3.5" />
-            <span>World Globe & Stats</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('HOUSES')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all ${
-              activeTab === 'HOUSES'
-                ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-900'
-            }`}
-          >
-            <Shield className="w-3.5 h-3.5" />
-            <span>House Registry</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('TREE')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all ${
-              activeTab === 'TREE'
-                ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-900'
-            }`}
-          >
-            <span className="text-sm">🌳</span>
-            <span>Family Tree</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('NOTICES')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all ${
-              activeTab === 'NOTICES'
-                ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-900'
-            }`}
-          >
-            <Scroll className="w-3.5 h-3.5" />
-            <span>Notice Board</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('EVENTS')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all ${
-              activeTab === 'EVENTS'
-                ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-900'
-            }`}
-          >
-            <Calendar className="w-3.5 h-3.5" />
-            <span>Event Board</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('BONDS')}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all ${
-              activeTab === 'BONDS'
-                ? 'bg-amber-500/15 text-amber-300 border border-amber-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-slate-900'
-            }`}
-          >
-            <Heart className="w-3.5 h-3.5 text-rose-400" />
-            <span>Marriage Seals</span>
-          </button>
-
-          {userRole === 'KEEPER' && (
             <button
-              onClick={() => setActiveTab('SANCTUM')}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all ${
-                activeTab === 'SANCTUM'
-                  ? 'bg-amber-500 text-slate-950 font-bold'
-                  : 'text-amber-400 hover:bg-amber-500/10'
+              onClick={onOpenFoundModal}
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 transition-all"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Found House</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Main Desktop Bar */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+          {/* Brand Identity */}
+          <div
+            onClick={() => setActiveTab('GLOBE')}
+            className="flex items-center gap-3 cursor-pointer group"
+          >
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 shadow-md shadow-amber-500/25 group-hover:scale-105 transition-transform">
+              <Landmark className="w-5 h-5 font-black" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-base font-bold font-serif-heraldic text-white tracking-wide">
+                  SOVEREIGN TREE
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold">
+                  REALM
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 font-sans">
+                Worldwide Archive of Noble Houses
+              </p>
+            </div>
+          </div>
+
+          {/* Desktop Navigation Tabs (Apple HIG Segmented Style) */}
+          <nav className="hidden lg:flex items-center gap-1 text-xs font-semibold apple-segmented-control p-1">
+            <button
+              onClick={() => setActiveTab('GLOBE')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all ${
+                activeTab === 'GLOBE' ? 'apple-segmented-item-active' : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Crown className="w-3.5 h-3.5" />
-              <span>Archive Sanctum</span>
+              <Globe className="w-4 h-4" />
+              <span>Globe & Stats</span>
             </button>
-          )}
-        </nav>
 
-        {/* Current House Emblem Badge */}
-        {currentHouse && (
-          <div className="flex items-center gap-2 pl-3 border-l border-slate-800">
-            <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center text-sm shadow"
-              style={{ backgroundColor: `${currentHouse.heraldicColor}25` }}
+            <button
+              onClick={() => setActiveTab('HOUSES')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all ${
+                activeTab === 'HOUSES' ? 'apple-segmented-item-active' : 'text-slate-400 hover:text-white'
+              }`}
             >
-              {currentHouse.badgeIcon || '🛡️'}
-            </div>
-            <div className="hidden lg:block text-left">
-              <span className="block text-xs font-bold text-white font-serif-heraldic leading-tight">
-                {currentHouse.name}
-              </span>
-              <span className="block text-[10px] text-amber-400/90 font-mono">
-                {currentHouse.originCountry}
-              </span>
-            </div>
-          </div>
-        )}
-      </div>
+              <Shield className="w-4 h-4" />
+              <span>Registry</span>
+            </button>
 
-      {/* Mobile Tabs Row */}
-      <div className="md:hidden flex items-center justify-around px-2 py-2 border-t border-slate-800 text-[11px] overflow-x-auto gap-2">
+            <button
+              onClick={() => setActiveTab('TREE')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all ${
+                activeTab === 'TREE' ? 'apple-segmented-item-active' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <span className="text-sm">🌳</span>
+              <span>Family Tree</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('NOTICES')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all ${
+                activeTab === 'NOTICES' ? 'apple-segmented-item-active' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Scroll className="w-4 h-4" />
+              <span>Notices</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('EVENTS')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all ${
+                activeTab === 'EVENTS' ? 'apple-segmented-item-active' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Events</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('BONDS')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all ${
+                activeTab === 'BONDS' ? 'apple-segmented-item-active' : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <Heart className="w-4 h-4 text-rose-400" />
+              <span>Marriage Seals</span>
+            </button>
+
+            {userRole === 'KEEPER' && (
+              <button
+                onClick={() => setActiveTab('SANCTUM')}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all ${
+                  activeTab === 'SANCTUM'
+                    ? 'bg-amber-500 text-slate-950 font-bold'
+                    : 'text-amber-400 hover:bg-amber-500/10'
+                }`}
+              >
+                <Crown className="w-4 h-4" />
+                <span>Sanctum</span>
+              </button>
+            )}
+          </nav>
+
+          {/* Current House Heraldic Pill */}
+          {currentHouse && (
+            <div className="flex items-center gap-3 pl-3 border-l border-white/10">
+              <div
+                className="w-8 h-8 rounded-xl flex items-center justify-center text-base shadow border border-white/15"
+                style={{ backgroundColor: `${currentHouse.heraldicColor}25` }}
+              >
+                {currentHouse.badgeIcon || '🛡️'}
+              </div>
+              <div className="hidden xl:block text-left">
+                <span className="block text-xs font-bold text-white font-serif-heraldic leading-tight">
+                  {currentHouse.name}
+                </span>
+                <span className="block text-[11px] text-amber-300 font-mono">
+                  {currentHouse.originCountry}
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Mobile Standard Bottom Tab Bar (Apple HIG tab-bars.md) */}
+      <nav
+        aria-label="Mobile Navigation"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 apple-liquid-glass border-t border-white/15 px-2 py-1 pb-safe flex items-center justify-around text-[10px] font-semibold"
+      >
         <button
           onClick={() => setActiveTab('GLOBE')}
-          className={`px-2 py-1 rounded-lg ${activeTab === 'GLOBE' ? 'text-amber-300 font-bold' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all apple-touch-target min-w-[50px] min-h-[48px] ${
+            activeTab === 'GLOBE' ? 'text-amber-400' : 'text-slate-400 hover:text-white'
+          }`}
         >
-          Globe
+          <Globe className="w-5 h-5 mb-0.5" />
+          <span>Globe</span>
         </button>
+
         <button
           onClick={() => setActiveTab('HOUSES')}
-          className={`px-2 py-1 rounded-lg ${activeTab === 'HOUSES' ? 'text-amber-300 font-bold' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all apple-touch-target min-w-[50px] min-h-[48px] ${
+            activeTab === 'HOUSES' ? 'text-amber-400' : 'text-slate-400 hover:text-white'
+          }`}
         >
-          Houses
+          <Shield className="w-5 h-5 mb-0.5" />
+          <span>Houses</span>
         </button>
+
         <button
           onClick={() => setActiveTab('TREE')}
-          className={`px-2 py-1 rounded-lg ${activeTab === 'TREE' ? 'text-amber-300 font-bold' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all apple-touch-target min-w-[50px] min-h-[48px] ${
+            activeTab === 'TREE' ? 'text-amber-400 font-bold' : 'text-slate-400 hover:text-white'
+          }`}
         >
-          Tree
+          <span className="text-lg leading-none mb-0.5">🌳</span>
+          <span>Tree</span>
         </button>
+
         <button
           onClick={() => setActiveTab('NOTICES')}
-          className={`px-2 py-1 rounded-lg ${activeTab === 'NOTICES' ? 'text-amber-300 font-bold' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all apple-touch-target min-w-[50px] min-h-[48px] ${
+            activeTab === 'NOTICES' ? 'text-amber-400' : 'text-slate-400 hover:text-white'
+          }`}
         >
-          Notices
+          <Scroll className="w-5 h-5 mb-0.5" />
+          <span>Notices</span>
         </button>
+
         <button
           onClick={() => setActiveTab('EVENTS')}
-          className={`px-2 py-1 rounded-lg ${activeTab === 'EVENTS' ? 'text-amber-300 font-bold' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all apple-touch-target min-w-[50px] min-h-[48px] ${
+            activeTab === 'EVENTS' ? 'text-amber-400' : 'text-slate-400 hover:text-white'
+          }`}
         >
-          Events
+          <Calendar className="w-5 h-5 mb-0.5" />
+          <span>Events</span>
         </button>
+
         <button
           onClick={() => setActiveTab('BONDS')}
-          className={`px-2 py-1 rounded-lg ${activeTab === 'BONDS' ? 'text-amber-300 font-bold' : 'text-slate-400'}`}
+          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all apple-touch-target min-w-[50px] min-h-[48px] ${
+            activeTab === 'BONDS' ? 'text-amber-400' : 'text-slate-400 hover:text-white'
+          }`}
         >
-          Seals
+          <Heart className="w-5 h-5 mb-0.5 text-rose-400" />
+          <span>Seals</span>
         </button>
+
         {userRole === 'KEEPER' && (
           <button
             onClick={() => setActiveTab('SANCTUM')}
-            className={`px-2 py-1 rounded-lg ${activeTab === 'SANCTUM' ? 'text-amber-300 font-bold' : 'text-slate-400'}`}
+            className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all apple-touch-target min-w-[50px] min-h-[48px] ${
+              activeTab === 'SANCTUM' ? 'text-amber-400 font-bold' : 'text-slate-400 hover:text-white'
+            }`}
           >
-            Sanctum
+            <Crown className="w-5 h-5 mb-0.5" />
+            <span>Sanctum</span>
           </button>
         )}
-      </div>
-    </header>
+      </nav>
+    </>
   );
 }

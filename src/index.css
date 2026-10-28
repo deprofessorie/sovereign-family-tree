@@ -2,67 +2,119 @@
 
 @layer base {
   :root {
-    --font-cinzel: 'Cinzel', serif;
-    --font-script: 'Great Vibes', cursive;
+    --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-serif-display: 'Cinzel', -apple-system-ui-serif, Georgia, "Times New Roman", serif;
+    --font-mono-system: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  body {
+    font-family: var(--font-system);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 
 .font-serif-heraldic {
-  font-family: var(--font-cinzel), Georgia, serif;
+  font-family: var(--font-serif-display);
 }
 
-.font-script {
-  font-family: var(--font-script), cursive;
+.font-system-mono {
+  font-family: var(--font-mono-system);
 }
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.6);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(245, 158, 11, 0.3);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(245, 158, 11, 0.6);
+  background: rgba(255, 255, 255, 0.35);
 }
 
-/* Glassmorphism effects */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(245, 158, 11, 0.15);
+/* Apple Liquid Glass Material (Functional Layer) */
+.apple-liquid-glass {
+  background: rgba(18, 24, 38, 0.82);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
 }
 
-.glass-panel-gold {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(245, 158, 11, 0.15);
+.apple-liquid-glass-clear {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.glow-gold {
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+/* Apple Inset Grouped Card Material (Content Layer) */
+.apple-card-content {
+  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glow-crimson {
-  box-shadow: 0 0 25px rgba(225, 29, 72, 0.25);
+.apple-card-content:hover {
+  background: rgba(30, 41, 59, 0.75);
+  border-color: rgba(245, 158, 11, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Apple Segmented Control */
+.apple-segmented-control {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.875rem;
+  padding: 3px;
+  display: inline-flex;
+}
+
+.apple-segmented-item {
+  border-radius: 0.625rem;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  transition: all 0.15s ease;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.apple-segmented-item-active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Apple HIG 44px Minimum Touch Target */
+.apple-touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Animated Love Line Gradient */
 @keyframes heartPulse {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.18); opacity: 1; filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.8)); }
+  0%, 100% { transform: scale(1); opacity: 0.95; }
+  50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 10px rgba(244, 63, 94, 0.85)); }
 }
 
 .heart-pulse {
-  animation: heartPulse 2.2s infinite ease-in-out;
+  animation: heartPulse 2.4s infinite ease-in-out;
 }

@@ -6,9 +6,6 @@ import {
   Shield,
   User,
   Sparkles,
-  Building,
-  Info,
-  Calendar,
   AlertCircle
 } from 'lucide-react';
 
@@ -19,9 +16,8 @@ export default function AddMemberModal({
   onClose,
   onSubmit
 }) {
-  // Personal Info Form
   const [name, setName] = useState('');
-  const [gender, setGender] = useState('Male'); // 'Male' | 'Female'
+  const [gender, setGender] = useState('Male');
   const [title, setTitle] = useState('');
   const [birthDate, setBirthDate] = useState('1990-01-01');
   const [isLiving, setIsLiving] = useState(true);
@@ -39,10 +35,9 @@ export default function AddMemberModal({
   const [maritalStatus, setMaritalStatus] = useState('Single');
 
   // If not Single -> Spouse House Selection
-  // value can be an existing house ID or 'NEW_HOUSE'
   const [selectedSpouseHouseId, setSelectedSpouseHouseId] = useState('');
 
-  // If selectedSpouseHouseId === 'NEW_HOUSE', fields for founding new house:
+  // If selectedSpouseHouseId === 'NEW_HOUSE'
   const [newHouseName, setNewHouseName] = useState('');
   const [newHouseCountry, setNewHouseCountry] = useState('');
   const [newHouseCity, setNewHouseCity] = useState('');
@@ -55,7 +50,7 @@ export default function AddMemberModal({
   const [selectedOppositeSexMemberId, setSelectedOppositeSexMemberId] = useState('');
   const [manualSpouseName, setManualSpouseName] = useState('');
   const [marriageDate, setMarriageDate] = useState('2015-06-20');
-  const [spouseStatus, setSpouseStatus] = useState('Living'); // Living | Divorced | Deceased
+  const [spouseStatus, setSpouseStatus] = useState('Living');
 
   // Male members: Multiple Wives radio question [Yes / No]
   const [hasMultipleWives, setHasMultipleWives] = useState('No');
@@ -73,25 +68,20 @@ export default function AddMemberModal({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Filter father candidates: ONLY males from this house or all houses
   const eligibleFathers = useMemo(() => {
     return allMembers.filter(m => m.gender === 'Male');
   }, [allMembers]);
 
-  // Filter mother candidates: ONLY females from this house or all houses
   const eligibleMothers = useMemo(() => {
     return allMembers.filter(m => m.gender === 'Female');
   }, [allMembers]);
 
-  // When selecting existing house for spouse:
-  // Take gender/sex into consideration and show list of members of opposite sex!
   const oppositeSexMembersOfSelectedHouse = useMemo(() => {
     if (!selectedSpouseHouseId || selectedSpouseHouseId === 'NEW_HOUSE') return [];
     const targetGender = gender === 'Male' ? 'Female' : 'Male';
     return allMembers.filter(m => m.houseId === selectedSpouseHouseId && m.gender === targetGender);
   }, [allMembers, selectedSpouseHouseId, gender]);
 
-  // Helper for adding extra wife row for males
   const handleAddWifeRow = () => {
     setAdditionalWives([
       ...additionalWives,
@@ -127,14 +117,13 @@ export default function AddMemberModal({
     setLoading(true);
 
     try {
-      // Build spouses array
       let spouses = [];
       let newSpouseFoundingHouse = null;
 
       if (maritalStatus !== 'Single') {
         if (selectedSpouseHouseId === 'NEW_HOUSE') {
           if (!newHouseName.trim() || !newHouseSpouseName.trim()) {
-            throw new Error('Please provide the new house name and spouse name.');
+            throw new Error('Please provide both the new house name and spouse name.');
           }
           newSpouseFoundingHouse = {
             name: newHouseName,
@@ -146,7 +135,6 @@ export default function AddMemberModal({
             spouseName: newHouseSpouseName
           };
         } else if (selectedSpouseHouseId) {
-          // Existing house selected
           let spouseName = manualSpouseName;
           let spouseId = null;
 
@@ -185,7 +173,6 @@ export default function AddMemberModal({
           });
         }
 
-        // Additional wives for Male if multiple wives = Yes
         if (gender === 'Male' && hasMultipleWives === 'Yes') {
           additionalWives.forEach((w, idx) => {
             if (w.spouseName.trim()) {
@@ -204,7 +191,6 @@ export default function AddMemberModal({
           });
         }
 
-        // Additional husbands for Female if Widowed / Divorced and hasMultipleHusbands = Yes
         if (gender === 'Female' && (maritalStatus === 'Widowed' || maritalStatus === 'Divorced') && hasMultipleHusbands === 'Yes') {
           if (multipleHusbandNotes.deceasedHusbandName) {
             const hHouse = houses.find(h => h.id === multipleHusbandNotes.deceasedHusbandHouseId);
@@ -263,19 +249,23 @@ export default function AddMemberModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-2xl rounded-3xl border-2 border-amber-500/30 glass-panel-gold p-6 md:p-8 text-white shadow-2xl my-8 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md overflow-y-auto">
+      <div className="relative w-full max-w-2xl rounded-3xl apple-liquid-glass p-6 md:p-8 text-white shadow-2xl my-8 animate-in fade-in zoom-in-95 max-h-[92vh] overflow-y-auto">
+        {/* Grabber */}
+        <div className="w-12 h-1.5 rounded-full bg-white/20 mx-auto mb-4" />
+
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center"
+          className="absolute top-5 right-5 text-slate-300 hover:text-white text-sm w-9 h-9 rounded-full bg-white/10 hover:bg-white/15 flex items-center justify-center apple-touch-target"
+          aria-label="Dismiss sheet"
         >
           ✕
         </button>
 
-        {/* Modal Header */}
-        <div className="flex items-center gap-3 border-b border-amber-500/20 pb-4">
+        {/* Sheet Header */}
+        <div className="flex items-center gap-3.5 border-b border-white/10 pb-5">
           <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-md border"
+            className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl shadow border border-white/15"
             style={{
               backgroundColor: `${house.heraldicColor}20`,
               borderColor: `${house.heraldicColor}50`,
@@ -288,29 +278,29 @@ export default function AddMemberModal({
             <h3 className="text-xl font-bold font-serif-heraldic text-white">
               Enroll Member into {house.name}
             </h3>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-300">
               Heraldic registration with gender lineage filters, multi-spouse protocols & house founding
             </p>
           </div>
         </div>
 
         {error && (
-          <div className="mt-4 p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-xs text-rose-300 flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0" />
+          <div className="mt-4 p-3.5 rounded-2xl bg-rose-500/20 border border-rose-500/30 text-xs text-rose-200 flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
             <span>{error}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-6">
-          {/* SECTION 1: Personal Identification */}
-          <div className="space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          {/* SECTION 1: Personal Identity */}
+          <div className="bg-black/30 p-4 rounded-2xl border border-white/10 space-y-4">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
               <User className="w-3.5 h-3.5" /> 1. Personal Identity & Heraldry
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                   Full Name <span className="text-rose-400">*</span>
                 </label>
                 <input
@@ -319,12 +309,12 @@ export default function AddMemberModal({
                   placeholder="e.g. Lady Genevieve Stirling"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                   Noble Title / Family Role
                 </label>
                 <input
@@ -332,15 +322,14 @@ export default function AddMemberModal({
                   placeholder="e.g. Warden of the Archive, Physician"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                 />
               </div>
             </div>
 
-            {/* Gender Selection */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                   Gender / Sex <span className="text-rose-400">*</span>
                 </label>
                 <select
@@ -349,7 +338,7 @@ export default function AddMemberModal({
                     setGender(e.target.value);
                     setSelectedOppositeSexMemberId('');
                   }}
-                  className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                 >
                   <option value="Male">♂ Male</option>
                   <option value="Female">♀ Female</option>
@@ -357,23 +346,23 @@ export default function AddMemberModal({
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                   Birth Date
                 </label>
                 <input
                   type="date"
                   value={birthDate}
                   onChange={(e) => setBirthDate(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3.5 py-2 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Status in the Realm
+                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                  Status in Realm
                 </label>
-                <div className="flex items-center gap-3 pt-1.5">
-                  <label className="flex items-center gap-1.5 text-xs text-emerald-400 cursor-pointer">
+                <div className="flex items-center gap-3 pt-2">
+                  <label className="flex items-center gap-1.5 text-xs text-emerald-300 font-medium cursor-pointer apple-touch-target min-h-[36px]">
                     <input
                       type="radio"
                       name="isLiving"
@@ -382,14 +371,14 @@ export default function AddMemberModal({
                     />
                     <span>Living</span>
                   </label>
-                  <label className="flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer">
+                  <label className="flex items-center gap-1.5 text-xs text-slate-300 font-medium cursor-pointer apple-touch-target min-h-[36px]">
                     <input
                       type="radio"
                       name="isLiving"
                       checked={isLiving === false}
                       onChange={() => setIsLiving(false)}
                     />
-                    <span>Deceased Ancestor</span>
+                    <span>Deceased</span>
                   </label>
                 </div>
               </div>
@@ -397,48 +386,48 @@ export default function AddMemberModal({
 
             {!isLiving && (
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                   Date of Passing (†)
                 </label>
                 <input
                   type="date"
                   value={deathDate}
                   onChange={(e) => setDeathDate(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3.5 py-2 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
-                Portrait / Avatar URL
+              <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                Portrait URL (Optional)
               </label>
               <input
                 type="url"
                 placeholder="https://images.unsplash.com/..."
                 value={avatar}
                 onChange={(e) => setAvatar(e.target.value)}
-                className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
               />
             </div>
           </div>
 
-          {/* SECTION 2: Parents Lineage Filtering */}
-          <div className="space-y-3 pt-4 border-t border-slate-800">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+          {/* SECTION 2: Parents Lineage (Strict Gender Filtering) */}
+          <div className="bg-black/30 p-4 rounded-2xl border border-white/10 space-y-3">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
               <Shield className="w-3.5 h-3.5" /> 2. Parents of Lineage (Strict Gender Filtering)
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Father: ONLY Males displayed */}
+              {/* Father: ONLY Males */}
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Father <span className="text-[10px] text-blue-400 font-mono">(Males Only)</span>
+                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                  Biological Father <span className="text-[10px] text-sky-400 font-mono">(Males Only)</span>
                 </label>
                 <select
                   value={fatherId}
                   onChange={(e) => setFatherId(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                 >
                   <option value="">-- No Father / Founding Root Patriarch --</option>
                   {eligibleFathers.map(f => (
@@ -449,15 +438,15 @@ export default function AddMemberModal({
                 </select>
               </div>
 
-              {/* Mother: ONLY Females displayed */}
+              {/* Mother: ONLY Females */}
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Mother <span className="text-[10px] text-pink-400 font-mono">(Females Only)</span>
+                <label className="block text-xs font-semibold text-slate-200 mb-1.5">
+                  Biological Mother <span className="text-[10px] text-pink-400 font-mono">(Females Only)</span>
                 </label>
                 <select
                   value={motherId}
                   onChange={(e) => setMotherId(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                 >
                   <option value="">-- No Mother / Founding Root Matriarch --</option>
                   {eligibleMothers.map(m => (
@@ -470,24 +459,22 @@ export default function AddMemberModal({
             </div>
           </div>
 
-          {/* SECTION 3: Marital Status & Detailed Spouse Routing */}
-          <div className="space-y-4 pt-4 border-t border-slate-800">
-            <div className="flex items-center justify-between">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
-                <Heart className="w-3.5 h-3.5" /> 3. Marital Status & Alliance Bonds
-              </h4>
-            </div>
+          {/* SECTION 3: Marital Status & Detailed Routing */}
+          <div className="bg-black/30 p-4 rounded-2xl border border-white/10 space-y-4">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
+              <Heart className="w-3.5 h-3.5" /> 3. Marital Status & Spousal Alliance
+            </h4>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                 Marital Status <span className="text-rose-400">*</span>
               </label>
               <select
                 value={maritalStatus}
                 onChange={(e) => setMaritalStatus(e.target.value)}
-                className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
               >
-                <option value="Single">Single (No Spouse Fields)</option>
+                <option value="Single">Single (Hides all spouse fields)</option>
                 <option value="Married">Married</option>
                 <option value="Widowed">Widowed</option>
                 <option value="Divorced">Divorced</option>
@@ -497,21 +484,14 @@ export default function AddMemberModal({
 
             {/* IF SINGLE: Prompt explicitly says "don't show fields related to married members" */}
             {maritalStatus === 'Single' ? (
-              <div className="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs text-slate-400 italic">
+              <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 italic">
                 Member registered as Single. No spouse fields displayed.
               </div>
             ) : (
               /* IF NOT SINGLE: Show spouse information fields as specified */
-              <div className="p-4 rounded-2xl bg-slate-900/80 border border-rose-500/30 space-y-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold text-amber-300 uppercase tracking-wider">
-                    Spouse House Selection
-                  </span>
-                </div>
-
-                {/* Select Spouse House */}
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4">
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-amber-300 mb-1.5">
                     Select Spouse's House from Archive:
                   </label>
                   <select
@@ -520,7 +500,7 @@ export default function AddMemberModal({
                       setSelectedSpouseHouseId(e.target.value);
                       setSelectedOppositeSexMemberId('');
                     }}
-                    className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                    className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                   >
                     <option value="">-- Choose Existing House from Archive --</option>
                     {houses.map(h => (
@@ -532,78 +512,78 @@ export default function AddMemberModal({
                   </select>
                 </div>
 
-                {/* CONDITION 1: IF HOUSE NOT IN ARCHIVE -> PROMPT TO FOUND NEW HOUSE */}
+                {/* CONDITION 1: IF NEW HOUSE */}
                 {selectedSpouseHouseId === 'NEW_HOUSE' && (
-                  <div className="p-4 rounded-xl bg-purple-950/40 border border-purple-500/40 space-y-3">
-                    <div className="flex items-center gap-2 text-purple-300 font-semibold text-xs">
-                      <Sparkles className="w-4 h-4 text-purple-400" />
+                  <div className="p-4 rounded-2xl bg-purple-950/50 border border-purple-500/40 space-y-3">
+                    <div className="flex items-center gap-2 text-purple-200 font-semibold text-xs">
+                      <Sparkles className="w-4 h-4 text-purple-300" />
                       <span>Founding New House for Spouse</span>
                     </div>
-                    <p className="text-[11px] text-purple-200/80">
-                      ⚡ <em>Important Protocol:</em> When a new family is founded here, the added spouse will be appointed <strong>Temporary Head</strong> of that house! Auto-generated login details will be issued to your archives dispatch.
+                    <p className="text-[11px] text-purple-200 leading-relaxed">
+                      ⚡ <em>Sovereign Protocol:</em> The added spouse will automatically be appointed <strong>Temporary Head</strong> of this newly chartered house! Auto-generated login credentials will be dispatched to your archive.
                     </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[11px] text-slate-300 mb-1">Spouse Full Name *</label>
+                        <label className="block text-[11px] font-semibold text-slate-200 mb-1">Spouse Full Name *</label>
                         <input
                           type="text"
                           required
                           placeholder="Spouse Name"
                           value={newHouseSpouseName}
                           onChange={(e) => setNewHouseSpouseName(e.target.value)}
-                          className="w-full px-3 py-1.5 text-xs bg-slate-950 border border-purple-700/60 rounded-lg text-white"
+                          className="w-full px-3 py-2 text-xs bg-slate-950 border border-purple-500/40 rounded-xl text-white min-h-[38px]"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] text-slate-300 mb-1">New House Name *</label>
+                        <label className="block text-[11px] font-semibold text-slate-200 mb-1">New House Name *</label>
                         <input
                           type="text"
                           required
                           placeholder="e.g. House Lancaster"
                           value={newHouseName}
                           onChange={(e) => setNewHouseName(e.target.value)}
-                          className="w-full px-3 py-1.5 text-xs bg-slate-950 border border-purple-700/60 rounded-lg text-white"
+                          className="w-full px-3 py-2 text-xs bg-slate-950 border border-purple-500/40 rounded-xl text-white min-h-[38px]"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-[11px] text-slate-300 mb-1">Origin Country</label>
+                        <label className="block text-[11px] font-semibold text-slate-200 mb-1">Origin Country</label>
                         <input
                           type="text"
                           placeholder="e.g. England, Italy, Canada"
                           value={newHouseCountry}
                           onChange={(e) => setNewHouseCountry(e.target.value)}
-                          className="w-full px-3 py-1.5 text-xs bg-slate-950 border border-purple-700/60 rounded-lg text-white"
+                          className="w-full px-3 py-2 text-xs bg-slate-950 border border-purple-500/40 rounded-xl text-white min-h-[38px]"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] text-slate-300 mb-1">House Motto</label>
+                        <label className="block text-[11px] font-semibold text-slate-200 mb-1">House Motto</label>
                         <input
                           type="text"
                           placeholder="e.g. Courage and Honor"
                           value={newHouseMotto}
                           onChange={(e) => setNewHouseMotto(e.target.value)}
-                          className="w-full px-3 py-1.5 text-xs bg-slate-950 border border-purple-700/60 rounded-lg text-white"
+                          className="w-full px-3 py-2 text-xs bg-slate-950 border border-purple-500/40 rounded-xl text-white min-h-[38px]"
                         />
                       </div>
                     </div>
                   </div>
                 )}
 
-                {/* CONDITION 2: IF EXISTING HOUSE SELECTED -> SHOW OPPOSITE-SEX MEMBERS OF THAT HOUSE */}
+                {/* CONDITION 2: IF EXISTING HOUSE SELECTED */}
                 {selectedSpouseHouseId && selectedSpouseHouseId !== 'NEW_HOUSE' && (
                   <div className="space-y-3 pt-2">
                     <div>
-                      <label className="block text-xs font-medium text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                         Select Spouse ({gender === 'Male' ? '♀ Females of House' : '♂ Males of House'}):
                       </label>
                       <select
                         value={selectedOppositeSexMemberId}
                         onChange={(e) => setSelectedOppositeSexMemberId(e.target.value)}
-                        className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                        className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                       >
                         <option value="">-- Choose registered opposite-sex kinsman --</option>
                         {oppositeSexMembersOfSelectedHouse.map(opp => (
@@ -617,7 +597,7 @@ export default function AddMemberModal({
 
                     {(!selectedOppositeSexMemberId || selectedOppositeSexMemberId === 'MANUAL') && (
                       <div>
-                        <label className="block text-xs font-medium text-slate-300 mb-1">
+                        <label className="block text-xs font-semibold text-slate-200 mb-1.5">
                           Custom Spouse Name:
                         </label>
                         <input
@@ -625,27 +605,27 @@ export default function AddMemberModal({
                           placeholder="Enter spouse name"
                           value={manualSpouseName}
                           onChange={(e) => setManualSpouseName(e.target.value)}
-                          className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-amber-500"
+                          className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white focus:outline-none focus:border-amber-400 min-h-[42px]"
                         />
                       </div>
                     )}
 
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-medium text-slate-300 mb-1">Marriage Date</label>
+                        <label className="block text-xs font-semibold text-slate-200 mb-1.5">Marriage Date</label>
                         <input
                           type="date"
                           value={marriageDate}
                           onChange={(e) => setMarriageDate(e.target.value)}
-                          className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white"
+                          className="w-full px-3.5 py-2 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white min-h-[42px]"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-slate-300 mb-1">Spouse Status</label>
+                        <label className="block text-xs font-semibold text-slate-200 mb-1.5">Spouse Status</label>
                         <select
                           value={spouseStatus}
                           onChange={(e) => setSpouseStatus(e.target.value)}
-                          className="w-full px-3.5 py-2 text-xs bg-slate-950/80 border border-slate-700 rounded-xl text-white"
+                          className="w-full px-3.5 py-2.5 text-xs bg-slate-950/90 border border-white/15 rounded-xl text-white min-h-[42px]"
                         >
                           <option value="Living">Living</option>
                           <option value="Divorced">Divorced</option>
@@ -656,14 +636,14 @@ export default function AddMemberModal({
                   </div>
                 )}
 
-                {/* FOR MALE MEMBERS: Multiple Wives radio question [Yes / No] */}
+                {/* FOR MALE MEMBERS: Multiple Wives */}
                 {gender === 'Male' && (
-                  <div className="pt-3 border-t border-slate-800 space-y-3">
+                  <div className="pt-3 border-t border-white/10 space-y-3">
                     <label className="block text-xs font-semibold text-amber-300">
                       Does this male member have multiple wives? (Living, Divorced, Deceased)
                     </label>
-                    <div className="flex items-center gap-4">
-                      <label className="flex items-center gap-1.5 text-xs text-slate-200 cursor-pointer">
+                    <div className="flex items-center gap-6">
+                      <label className="flex items-center gap-2 text-xs text-slate-200 font-medium cursor-pointer apple-touch-target min-h-[36px]">
                         <input
                           type="radio"
                           name="multipleWivesRadio"
@@ -673,7 +653,7 @@ export default function AddMemberModal({
                         />
                         <span>No (Single union)</span>
                       </label>
-                      <label className="flex items-center gap-1.5 text-xs text-amber-400 font-semibold cursor-pointer">
+                      <label className="flex items-center gap-2 text-xs text-amber-300 font-bold cursor-pointer apple-touch-target min-h-[36px]">
                         <input
                           type="radio"
                           name="multipleWivesRadio"
@@ -685,7 +665,6 @@ export default function AddMemberModal({
                       </label>
                     </div>
 
-                    {/* Dynamic repeater for multiple wives */}
                     {hasMultipleWives === 'Yes' && (
                       <div className="space-y-3 pt-2">
                         <div className="flex items-center justify-between">
@@ -693,25 +672,25 @@ export default function AddMemberModal({
                           <button
                             type="button"
                             onClick={handleAddWifeRow}
-                            className="px-2.5 py-1 text-xs rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 hover:bg-amber-500/30 flex items-center gap-1"
+                            className="px-3 py-1.5 text-xs rounded-xl bg-white/10 text-amber-300 border border-white/15 hover:bg-white/15 flex items-center gap-1 apple-touch-target min-h-[36px]"
                           >
-                            <Plus className="w-3 h-3" /> Add Wife
+                            <Plus className="w-3.5 h-3.5" /> Add Wife
                           </button>
                         </div>
 
                         {additionalWives.map((wife, index) => (
                           <div
                             key={index}
-                            className="p-3 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2 text-xs"
+                            className="p-3.5 rounded-2xl bg-black/40 border border-white/10 space-y-2 text-xs"
                           >
                             <div className="flex items-center justify-between">
-                              <span className="font-semibold text-amber-400">Wife #{index + 2}</span>
+                              <span className="font-bold text-amber-400">Wife #{index + 2}</span>
                               <button
                                 type="button"
                                 onClick={() => handleRemoveWifeRow(index)}
-                                className="text-rose-400 hover:text-rose-300"
+                                className="text-rose-400 hover:text-rose-300 p-1 apple-touch-target min-w-[32px] min-h-[32px]"
                               >
-                                <Trash2 className="w-3.5 h-3.5" />
+                                <Trash2 className="w-4 h-4" />
                               </button>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -720,23 +699,21 @@ export default function AddMemberModal({
                                 placeholder="Wife's Full Name"
                                 value={wife.spouseName}
                                 onChange={(e) => handleWifeChange(index, 'spouseName', e.target.value)}
-                                className="px-2.5 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-white"
+                                className="px-3 py-2 bg-slate-900 border border-white/15 rounded-xl text-white min-h-[38px]"
                               />
                               <select
                                 value={wife.spouseHouseId}
                                 onChange={(e) => handleWifeChange(index, 'spouseHouseId', e.target.value)}
-                                className="px-2.5 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-white"
+                                className="px-3 py-2 bg-slate-900 border border-white/15 rounded-xl text-white min-h-[38px]"
                               >
                                 {houses.map(h => (
-                                  <option key={h.id} value={h.id}>
-                                    {h.name}
-                                  </option>
+                                  <option key={h.id} value={h.id}>{h.name}</option>
                                 ))}
                               </select>
                               <select
                                 value={wife.status}
                                 onChange={(e) => handleWifeChange(index, 'status', e.target.value)}
-                                className="px-2.5 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-white"
+                                className="px-3 py-2 bg-slate-900 border border-white/15 rounded-xl text-white min-h-[38px]"
                               >
                                 <option value="Living">Living</option>
                                 <option value="Divorced">Divorced</option>
@@ -752,12 +729,12 @@ export default function AddMemberModal({
 
                 {/* FOR FEMALE MEMBERS: Multiple Husbands ONLY if Widowed or Divorced */}
                 {gender === 'Female' && (maritalStatus === 'Widowed' || maritalStatus === 'Divorced') && (
-                  <div className="pt-3 border-t border-slate-800 space-y-3">
+                  <div className="pt-3 border-t border-white/10 space-y-3">
                     <label className="block text-xs font-semibold text-amber-300">
-                      Record prior or subsequent marriages? (Widow of whom / Divorced of whom)
+                      Record prior marriages? (Widow of whom / Divorced of whom)
                     </label>
-                    <div className="flex items-center gap-4">
-                      <label className="flex items-center gap-1.5 text-xs text-slate-200 cursor-pointer">
+                    <div className="flex items-center gap-6">
+                      <label className="flex items-center gap-2 text-xs text-slate-200 font-medium cursor-pointer apple-touch-target min-h-[36px]">
                         <input
                           type="radio"
                           name="femaleMultipleRadio"
@@ -767,7 +744,7 @@ export default function AddMemberModal({
                         />
                         <span>No</span>
                       </label>
-                      <label className="flex items-center gap-1.5 text-xs text-amber-400 font-semibold cursor-pointer">
+                      <label className="flex items-center gap-2 text-xs text-amber-300 font-bold cursor-pointer apple-touch-target min-h-[36px]">
                         <input
                           type="radio"
                           name="femaleMultipleRadio"
@@ -780,9 +757,9 @@ export default function AddMemberModal({
                     </div>
 
                     {hasMultipleHusbands === 'Yes' && (
-                      <div className="space-y-3 p-3 rounded-xl bg-slate-950 border border-slate-800">
+                      <div className="space-y-3 p-3.5 rounded-2xl bg-black/40 border border-white/10">
                         <div>
-                          <label className="block text-[11px] text-slate-300 mb-1">
+                          <label className="block text-xs font-semibold text-slate-300 mb-1">
                             🕊️ "Widow of whom":
                           </label>
                           <div className="grid grid-cols-2 gap-2">
@@ -794,7 +771,7 @@ export default function AddMemberModal({
                                 ...multipleHusbandNotes,
                                 deceasedHusbandName: e.target.value
                               })}
-                              className="px-2.5 py-1.5 text-xs bg-slate-900 border border-slate-700 rounded-lg text-white"
+                              className="px-3 py-2 text-xs bg-slate-900 border border-white/15 rounded-xl text-white min-h-[38px]"
                             />
                             <select
                               value={multipleHusbandNotes.deceasedHusbandHouseId}
@@ -802,7 +779,7 @@ export default function AddMemberModal({
                                 ...multipleHusbandNotes,
                                 deceasedHusbandHouseId: e.target.value
                               })}
-                              className="px-2.5 py-1.5 text-xs bg-slate-900 border border-slate-700 rounded-lg text-white"
+                              className="px-3 py-2 text-xs bg-slate-900 border border-white/15 rounded-xl text-white min-h-[38px]"
                             >
                               <option value="">-- Husband's House --</option>
                               {houses.map(h => (
@@ -813,7 +790,7 @@ export default function AddMemberModal({
                         </div>
 
                         <div>
-                          <label className="block text-[11px] text-slate-300 mb-1">
+                          <label className="block text-xs font-semibold text-slate-300 mb-1">
                             💔 "Divorced of whom":
                           </label>
                           <div className="grid grid-cols-2 gap-2">
@@ -825,7 +802,7 @@ export default function AddMemberModal({
                                 ...multipleHusbandNotes,
                                 divorcedHusbandName: e.target.value
                               })}
-                              className="px-2.5 py-1.5 text-xs bg-slate-900 border border-slate-700 rounded-lg text-white"
+                              className="px-3 py-2 text-xs bg-slate-900 border border-white/15 rounded-xl text-white min-h-[38px]"
                             />
                             <select
                               value={multipleHusbandNotes.divorcedHusbandHouseId}
@@ -833,7 +810,7 @@ export default function AddMemberModal({
                                 ...multipleHusbandNotes,
                                 divorcedHusbandHouseId: e.target.value
                               })}
-                              className="px-2.5 py-1.5 text-xs bg-slate-900 border border-slate-700 rounded-lg text-white"
+                              className="px-3 py-2 text-xs bg-slate-900 border border-white/15 rounded-xl text-white min-h-[38px]"
                             >
                               <option value="">-- Former House --</option>
                               {houses.map(h => (
@@ -850,21 +827,21 @@ export default function AddMemberModal({
             )}
           </div>
 
-          {/* Form Submission */}
-          <div className="pt-4 border-t border-amber-500/20 flex items-center justify-end gap-3">
+          {/* Apple HIG Form Actions */}
+          <div className="pt-4 border-t border-white/10 flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+              className="px-4 py-2.5 text-xs font-semibold rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 apple-touch-target min-h-[44px]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-2.5 text-xs font-bold rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:brightness-110 text-slate-950 shadow-lg shadow-amber-500/20 transition-all disabled:opacity-50"
+              className="px-6 py-2.5 text-xs font-bold rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20 transition-all disabled:opacity-50 apple-touch-target min-h-[44px]"
             >
-              {loading ? 'Inscribing in Sovereign Roll...' : 'Enroll Kinsman into Roll'}
+              {loading ? 'Enrolling...' : 'Enroll Kinsman into Roll'}
             </button>
           </div>
         </form>

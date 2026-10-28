@@ -140,6 +140,27 @@
       "alliedHouses": [
         "house-stirling"
       ]
+    },
+    {
+      "id": "house-a-6548",
+      "name": "a",
+      "motto": "adfdsa",
+      "originCountry": "aad",
+      "originCity": "add",
+      "foundedYear": 2026,
+      "crestSymbol": "Crown & Oak Tree",
+      "heraldicColor": "#f59e0b",
+      "badgeIcon": "🏰",
+      "headMemberId": "m-house-a-6548-founder",
+      "headRoleTitle": "Founder & Patriarch",
+      "referralCode": "A-3280",
+      "description": "Newly registered sovereign house founded in aad.",
+      "coordinates": {
+        "lat": 1.7540736254766571,
+        "lng": -110.22561993691576
+      },
+      "isApproved": true,
+      "alliedHouses": []
     }
   ],
   "members": [
@@ -651,6 +672,23 @@
       "fatherId": null,
       "motherId": null,
       "maritalStatus": "Married",
+      "spouses": [],
+      "isTemporaryHead": false
+    },
+    {
+      "id": "m-house-a-6548-founder",
+      "houseId": "house-a-6548",
+      "name": "f",
+      "gender": "Male",
+      "title": "Founding Lord",
+      "birthDate": "1980-01-01",
+      "deathDate": null,
+      "isLiving": true,
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&fit=crop&q=80",
+      "bio": "Founding patriarch of a.",
+      "fatherId": null,
+      "motherId": null,
+      "maritalStatus": "Single",
       "spouses": [],
       "isTemporaryHead": false
     }
